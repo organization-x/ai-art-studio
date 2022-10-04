@@ -7,14 +7,31 @@
                     <VueDrawingCanvas ref="VueCanvasDrawing" v-model:image="data.image" :stroke-type="data.strokeType"
                         :line-cap="data.lineCap" :line-join="data.lineJoin" :fill-shape="data.fillShape"
                         :eraser="data.eraser" :lineWidth="data.line" :color="data.color"
-                        :background-color="data.backgroundColor" 
-                        :lock="data.disabled" />
+                        :background-color="data.backgroundColor" :lock="data.disabled" />
+                    <div class="output">
+                        <p>Output:</p>
+                        <img :src="data.image" style="border: solid 1px #000000" />
+                    </div>
                 </div>
                 <div>
                     <button @click="data.eraser=false" class="btn btn-secondary"
                         :class="{'active':!data.eraser}">Draw</button>
                     <button @click="data.eraser=true" class="btn btn-secondary"
                         :class="{'active':data.eraser}">Erase</button>
+                    <select v-model="data.line">
+                        <option v-for="n in 25" :key="'option-' + n" :value="n">
+                            {{ n }}
+                        </option>
+                    </select>
+                    <input type="color" v-model="data.color" />
+                    <button type="button" @click.prevent="$refs.VueCanvasDrawing.reset()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-file-earmark" viewBox="0 0 16 16">
+                            <path
+                                d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
+                        </svg>
+                        Reset
+                    </button>
                 </div>
             </div>
         </div>
@@ -44,7 +61,7 @@ const data = reactive({
   
 <style lang="scss">
 .active {
-    background-color: aquamarine !important;
+    background-color: rgb(165, 51, 226) !important;
     color: black !important;
 }
 </style>

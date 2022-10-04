@@ -16,16 +16,16 @@ import HelloWorld from './components/HelloWorld.vue'
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li>
-          <RouterLink to="/home" class="nav-link px-2 link-light">Home</RouterLink>
+          <RouterLink to="/home" class="nav-link px-2 text-light">Home</RouterLink>
         </li>
         <li>
-          <RouterLink to="/team" class="nav-link px-2 link-light">Team</RouterLink>
+          <RouterLink to="/team" class="nav-link px-2 text-light">Team</RouterLink>
         </li>
         <li>
-          <RouterLink to="/questions" class="nav-link px-2 link-light">Questions</RouterLink>
+          <RouterLink to="/questions" class="nav-link px-2 text-light">Questions</RouterLink>
         </li>
         <li>
-          <RouterLink to="/gallery" class="nav-link px-2 link-light">Gallery</RouterLink>
+          <RouterLink to="/gallery" class="nav-link px-2 text-light">Gallery</RouterLink>
         </li>
 
         <button type="button" class="btn btn-outline-primary me-2">Login</button>
@@ -39,5 +39,5 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-
+a.router-link-active {color:rgb(71, 71, 71) !important} 
 </style>
