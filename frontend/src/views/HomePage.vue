@@ -1,26 +1,20 @@
 <template>
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6">
+        <div class="row d-flex">
+            <div class="col d-flex">
                 <div>
-                    <h3>Canvas:</h3>
-                    <VueDrawingCanvas ref="VueCanvasDrawing" v-model:image="data.image" :stroke-type="data.strokeType"
-                        :line-cap="data.lineCap" :line-join="data.lineJoin" :fill-shape="data.fillShape"
-                        :eraser="data.eraser" :lineWidth="data.line" :color="data.color"
-                        :background-color="data.backgroundColor" :lock="data.disabled" />
-                </div>
-                <div>
-                    <button @click="data.eraser=false" class="btn btn-secondary"
+                    <button @click="data.eraser=false" class="form-control btn btn-secondary"
                         :class="{'active':!data.eraser}">Draw</button>
-                    <button @click="data.eraser=true" class="btn btn-secondary"
+                    <button @click="data.eraser=true" class="form-control btn btn-secondary"
                         :class="{'active':data.eraser}">Erase</button>
-                    <select v-model="data.line" class="btn btn-secondary">
+                    <select v-model="data.line" class="form-control">
                         <option v-for="n in 25" :key="'option-' + n" :value="n">
                             {{ n }}
                         </option>
                     </select>
-                    <input type="color" v-model="data.color" />
-                    <button type="button" @click.prevent="$refs.VueCanvasDrawing.reset()" class="btn btn-secondary">
+                    <input type="color" v-model="data.color" class="form-control" />
+                    <button type="button" @click.prevent="$refs.VueCanvasDrawing.reset()"
+                        class="form-control btn btn-secondary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-file-earmark" viewBox="0 0 16 16">
                             <path
@@ -29,10 +23,18 @@
                         Reset
                     </button>
                 </div>
+                <div class="flex-grow-1">
+                    <VueDrawingCanvas ref="VueCanvasDrawing" v-model:image="data.image" :stroke-type="data.strokeType"
+                        :line-cap="data.lineCap" :line-join="data.lineJoin" :fill-shape="data.fillShape"
+                        :eraser="data.eraser" :lineWidth="data.line" :color="data.color"
+                        :background-color="data.backgroundColor" :lock="data.disabled" />
+                </div>
             </div>
-            <div class="output; col-md-6">
-                    <h3>Output:</h3>
-                    <img :src="data.image" style="border: solid 1px #000000" />
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3>Output:</h3>
+                <img :src="data.image" style="border: solid 1px #000000" />
             </div>
         </div>
     </div>
