@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h1>Our Team</h1>
+    <h1>Gallery</h1>
   </div>
 </template>
-
+  
 <style>
 
 </style>
