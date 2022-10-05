@@ -10,7 +10,7 @@
       <br />
       - Brent Kong:
       <br />
-      - Engoren Lim:
+      - Engoron Lim:
       <br />
       - Jacq G:
       <br />
