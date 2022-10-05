@@ -50,7 +50,7 @@ const data = reactive({
     disabled: false,
     fillShape: false,
     line: 20,
-    color: "#be0b0b",
+    color: "black",
     strokeType: "dash",
     lineCap: "round",
     lineJoin: "round",
@@ -63,7 +63,7 @@ const data = reactive({
   
 <style lang="scss">
 .active {
-    background-color: rgb(165, 51, 226) !important;
+    background-color: lightgrey !important;
     color: black !important;
 }
 </style>
