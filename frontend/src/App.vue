@@ -1,7 +1,6 @@
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
@@ -27,15 +26,13 @@ import HelloWorld from './components/HelloWorld.vue'
         <li>
           <RouterLink to="/gallery" class="nav-link px-2 text-light">Gallery</RouterLink>
         </li>
-
+<!-- 
         <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
+        <button type="button" class="btn btn-primary">Sign-up</button> -->
     </ul>
     </header>
+    <RouterView />
   </div>
-
-  <RouterView />
-
 </template>
 
 <style>
@@ -43,6 +40,7 @@ a.router-link-active {color:rgb(71, 71, 71) !important}
 
 header{
 background: linear-gradient(90deg, rgb(161, 48, 247) 0%, rgb(122, 24, 233) 35%, rgb(89, 0, 255) 100%);
+position: relative;
 }
 
 body{
