@@ -1,3 +1,4 @@
+<!---
 <template>
     <div class="container mt-4">
         <div class="row d-flex">
@@ -67,4 +68,4 @@ const data = reactive({
     color: black !important;
 }
 </style>
-    
+-->
