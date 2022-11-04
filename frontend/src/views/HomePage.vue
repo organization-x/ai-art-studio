@@ -1,9 +1,10 @@
 <template>
   <div class="container-fluid mt-4">
-    <h2>Tools</h2>
+    <h2>Canvas</h2>
     <div class="row">
       <div class="col d-flex">
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column pe-2">
+          <!--Paint Brush-->
           <button
             @click="data.eraser = false"
             class="btn-tool"
@@ -11,44 +12,70 @@
           >
             <i class="fa-solid fa-paintbrush"></i>
           </button>
+          <!--erasser-->
           <button
             @click="data.eraser = true"
             class="btn-tool"
             :class="{ active: data.eraser }"
           >
-            Erase
+            <i class="fa-solid fa-eraser"></i>
           </button>
           <select v-model="data.line" class="btn-tool">
             <option v-for="n in 25" :key="'option-' + n" :value="n">
               {{ n }}
             </option>
           </select>
-          <input type="color" v-model="data.color" class="btn-tool" />
+
+          <!-- Palete -->
+          <div class="hidden-palatte-parent">
+            <input
+              type="color"
+              v-model="data.color"
+              ref="inputColor"
+              class="hidden-palatte"
+            />
+            <button
+              type="button"
+              @click.prevent="$refs.inputColor.click()"
+              class="btn-tool"
+              :style="{ color: data.color }"
+            >
+              <i class="fa-solid fa-palette"></i>
+            </button>
+          </div>
+
+          <div class="hidden-palatte-parent">
+            <input
+              type="color"
+              v-model="data.backgroundColor"
+              :on-change="$refs.VueCanvasDrawing?.redraw()"
+              ref="inputBackgroundColor"
+              class="hidden-palatte"
+            />
+            <button
+              type="button"
+              @click.prevent="$refs.inputBackgroundColor.click()"
+              class="btn-tool"
+              :style="{ color: data.backgroundColor }"
+            >
+            <i class="fa-solid fa-fill-drip"></i>
+            </button>
+          </div>
+
           <button
             type="button"
             @click.prevent="$refs.VueCanvasDrawing.reset()"
             class="btn-tool"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-file-earmark"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"
-              />
-            </svg>
-            Reset
+            <i class="fa-solid fa-trash"></i>
+            <!-- fill background -->
           </button>
         </div>
 
         <div class="flex-grow-1">
           <VueDrawingCanvas
             ref="VueCanvasDrawing"
-            v-model:image="data.image"
+            :v-model:image="data.image"
             :stroke-type="data.strokeType"
             :line-cap="data.lineCap"
             :line-join="data.lineJoin"
@@ -58,7 +85,10 @@
             :color="data.color"
             :background-color="data.backgroundColor"
             :lock="data.disabled"
+            :width="data.width"
+            :height="data.height"
           />
+          <i class="fa-solid fa-eraser"></i>
         </div>
       </div>
     </div>
@@ -89,6 +119,8 @@ const data = reactive({
   backgroundImage: null,
   watermark: null,
   additionalImages: [],
+  height: 400,
+  width: 800,
 });
 </script>
   
@@ -97,10 +129,10 @@ const data = reactive({
   width: 50px;
   height: 50px;
   overflow: hidden;
-  background-color: rgba(63, 59, 59, );
-  color: rgb(255, 255, 255);
+  background: transparent;
   border: none;
-  
+  color: rgba($color: #ffffff, $alpha: 1);
+
   &:hover {
     background-color: rgba(0, 0, 0, 0.2);
     border: none;
@@ -108,8 +140,19 @@ const data = reactive({
 }
 
 .active {
-  background-color: rgba($color: #6d6c6c, $alpha: 0.9) !important;
   color: rgba($color: #000000, $alpha: 1) !important;
+}
+.hidden-palatte-parent {
+  position: relative;
+}
+.hidden-palatte {
+  position: absolute;
+  left: 100%;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
 }
 </style>
     
