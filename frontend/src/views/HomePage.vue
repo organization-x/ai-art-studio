@@ -75,7 +75,7 @@
         <div class="flex-grow-1">
           <VueDrawingCanvas
             ref="VueCanvasDrawing"
-            :v-model:image="data.image"
+            v-model:image="data.image"
             :stroke-type="data.strokeType"
             :line-cap="data.lineCap"
             :line-join="data.lineJoin"
