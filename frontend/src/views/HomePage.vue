@@ -36,7 +36,7 @@
             />
             <button
               type="button"
-              @click.prevent="$refs.inputColor.click()"
+              @click.prevent="($refs as any).inputColor.click()"
               class="btn-tool"
               :style="{ color: data.color }"
             >
@@ -48,13 +48,13 @@
             <input
               type="color"
               v-model="data.backgroundColor"
-              :on-change="$refs.VueCanvasDrawing?.redraw()"
+              :on-change="($refs as any).VueCanvasDrawing?.redraw()"
               ref="inputBackgroundColor"
               class="hidden-palatte"
             />
             <button
               type="button"
-              @click.prevent="$refs.inputBackgroundColor.click()"
+              @click.prevent="($refs as any).inputBackgroundColor.click()"
               class="btn-tool"
               :style="{ color: data.backgroundColor }"
             >
@@ -64,14 +64,13 @@
 
           <button
             type="button"
-            @click.prevent="$refs.VueCanvasDrawing.reset()"
+            @click.prevent="($refs as any).VueCanvasDrawing.reset()"
             class="btn-tool"
           >
             <i class="fa-solid fa-trash"></i>
             <!-- fill background -->
           </button>
         </div>
-
         <div class="flex-grow-1">
           <VueDrawingCanvas
             ref="VueCanvasDrawing"
@@ -91,6 +90,7 @@
           <i class="fa-solid fa-eraser"></i>
         </div>
       </div>
+      <input class="form-control" type="text" placeholder="Cartoon, Relistic, etc . . ." aria-label="default input example">
     </div>
     <div class="row">
       <div class="col-12">

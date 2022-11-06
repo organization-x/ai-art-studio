@@ -7,9 +7,6 @@ import { RouterLink, RouterView } from 'vue-router'
   <div>
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-light text-decoration-none">
-        <svg class="bi me-2" width="40" height="32">
-          <use xlink:href="/" />
-        </svg>
         <span class="fs-4">Keyo Art</span>
       </a>
 
