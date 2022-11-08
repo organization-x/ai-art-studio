@@ -151,7 +151,7 @@ function onDragStart() {
 }
 
 function onDrag($event) {
-  console.log("onDrag",$event)
+  // console.log("onDrag",$event)
   data.width = startX + $event.x
   data.height = startY + $event.y
   window.setTimeout(() => VueCanvasDrawing.value.redraw())
