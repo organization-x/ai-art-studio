@@ -1,4 +1,3 @@
-<!---
 <template>
   <div class="container-fluid mt-4">
     <div v-if="data.status === 'drawing'">
@@ -71,11 +70,7 @@
             >
               <i class="fa-solid fa-trash"></i>
             </button>
-            <button
-              type="button"
-              @click.prevent="send()"
-              class="btn-tool"
-            >
+            <button type="button" @click.prevent="send()" class="btn-tool">
               <i class="fa-solid fa-paper-plane"></i>
               <!-- fill background -->
             </button>
@@ -111,7 +106,7 @@
             <input
               class="form-control rounded-1"
               type="text"
-              placeholder="Cartoon, Relistic, etc . . ."
+              placeholder="Cartoon, Realistic, etc . . ."
               aria-label="default input example"
             />
           </div>
@@ -128,10 +123,11 @@
     <div v-if="data.status === 'success'">
       <div class="row">
         <div class="col-12">
-          <h3>AI Generated Result:
-            <button @click="data.status ='drawing'" class = "btn btn-secondary">
-            DRAW AGAIN
-          </button>
+          <h3>
+            AI Generated Result:
+            <button @click="data.status = 'drawing'" class="btn btn-secondary">
+              DRAW AGAIN
+            </button>
           </h3>
           <img :src="data.imageResponse" class="rounded-1" />
         </div>
@@ -139,7 +135,7 @@
     </div>
   </div>
 </template>
-  
+
 <script setup lang="ts">
 import VueDrawingCanvas from "vue-drawing-canvas";
 import { reactive, ref } from "vue";
@@ -173,7 +169,7 @@ function onDragStart() {
   startY = data.height;
 }
 
-function onDrag($event) {
+function onDrag($event: { x: number; y: number }) {
   // console.log("onDrag",$event)
   data.width = startX + $event.x;
   data.height = startY + $event.y;
@@ -181,13 +177,13 @@ function onDrag($event) {
 }
 
 async function send() {
-  data.status = "sending"
-  data.imageResponse = await data.image 
+  data.status = "sending";
+  data.imageResponse = await data.image;
 
-  data.status = "success"
+  data.status = "success";
 }
 </script>
-  
+
 <style lang="scss">
 .btn-tool {
   width: 50px;
