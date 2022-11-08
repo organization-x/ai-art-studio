@@ -58,7 +58,7 @@
               class="btn-tool"
               :style="{ color: data.backgroundColor }"
             >
-            <i class="fa-solid fa-fill-drip"></i>
+              <i class="fa-solid fa-fill-drip"></i>
             </button>
           </div>
 
@@ -86,16 +86,23 @@
             :lock="data.disabled"
             :width="data.width"
             :height="data.height"
+            class="rounded-1"
           />
-          <i class="fa-solid fa-eraser"></i>
+          <h4>Text to Image</h4>
+          <input
+            class="form-control rounded-1"
+            type="text"
+            placeholder="Cartoon, Relistic, etc . . ."
+            aria-label="default input example"
+          />
         </div>
       </div>
-      <input class="form-control" type="text" placeholder="Cartoon, Relistic, etc . . ." aria-label="default input example">
+      <div class="col-12"></div>
     </div>
     <div class="row">
       <div class="col-12">
         <h3>Output:</h3>
-        <img :src="data.image" style="border: solid 1px #000000" />
+        <img :src="data.image" class="rounded-1" />
       </div>
     </div>
   </div>
@@ -139,6 +146,12 @@ const data = reactive({
   }
 }
 
+.text-box {
+  background-color: rgba(139, 129, 129, 0.2);
+  border-radius: 10px;
+  width: 100%;
+}
+
 .active {
   color: rgba($color: #000000, $alpha: 1) !important;
 }
@@ -153,6 +166,13 @@ const data = reactive({
   height: 1px;
   overflow: hidden;
   opacity: 0;
+}
+
+.tooltip-top {
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
 }
 </style>
     

@@ -10,18 +10,18 @@ import { RouterLink, RouterView } from 'vue-router'
         <span class="fs-4">Keyo Art</span>
       </a>
 
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 page-tool">
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li>
-          <RouterLink to="/home" class="nav-link px-2 text-light bold">Home</RouterLink>
+          <RouterLink to="/home" class="nav-link px-2 text-light bold hover-underline-animation">Home</RouterLink>
         </li>
         <li>
-          <RouterLink to="/team" class="nav-link px-2 text-light">Team</RouterLink>
+          <RouterLink to="/team" class="nav-link px-2 text-light hover-underline-animation">Team</RouterLink>
         </li>
         <li>
-          <RouterLink to="/questions" class="nav-link px-2 text-light">Questions</RouterLink>
+          <RouterLink to="/questions" class="nav-link px-2 text-light hover-underline-animation">Questions</RouterLink>
         </li>
         <li>
-          <RouterLink to="/gallery" class="nav-link px-2 text-light">Gallery</RouterLink>
+          <RouterLink to="/gallery" class="nav-link px-2 text-light hover-underline-animation">Gallery</RouterLink>
         </li>
 <!-- 
         <button type="button" class="btn btn-outline-primary me-2">Login</button>
@@ -33,40 +33,37 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style lang="scss" scoped>
-a.router-link-active {color:rgb(71, 71, 71) !important} 
 
 header{
 background: linear-gradient(90deg, rgb(161, 48, 247) 0%, rgb(122, 24, 233) 35%, rgb(89, 0, 255) 100%);
 position: relative;
 }
 .page-tool{
+  .hover-underline-animation {
+  display: inline-block;
+  position: relative;
+  color: #73ec89;
+}
 
-//   .underline-hover-effect {
-//   display: inline-block;
-//   padding-bottom: 0.25rem; /* defines the space between text and underline */
-//   position: relative;
-// }
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 5px;
+  bottom: 0;
+  left: 0;
+  background-color: #73ec89;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
 
-// .underline-hover-effect::before {
-//   content: "";
-//   position: absolute;
-//   left: 0;
-//   bottom: 0;
-//   width: 0;
-//   height: 2px;
-//   background-color: rgb(0, 255, 0);
-//   transition: width 0.25s ease-out;
-// }
-// .underline-hover-effect:hover::before {
-//   width: 100%;
-// }
-
-  :hover {
-    background-color: rgba(0, 0, 0, 0.2);
-    border: none;
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
   }
-  }
-
+  a.router-link-active {color:rgb(71, 71, 71) !important} 
 
 body{
   background-color: rgb(58, 53, 53);
