@@ -48,7 +48,7 @@
             <input
               type="color"
               v-model="data.backgroundColor"
-              :on-change="($refs as any).VueCanvasDrawing?.redraw()"
+              @change="($refs as any).VueCanvasDrawing?.redraw()"
               ref="inputBackgroundColor"
               class="hidden-palatte"
             />
@@ -71,7 +71,7 @@
             <!-- fill background -->
           </button>
         </div>
-        <div class="flex-grow-1">
+        <div class="flex-grow-1 position-relative">
           <VueDrawingCanvas
             ref="VueCanvasDrawing"
             v-model:image="data.image"
@@ -86,8 +86,18 @@
             :lock="data.disabled"
             :width="data.width"
             :height="data.height"
-            class="rounded-1"
+            class="rounded-1 border"
           />
+          <Dragger
+            @started="onDragStart()"
+            @moved="onDrag($event)"
+            :style="{
+              position: 'absolute',
+              left: data.width + 'px',
+              top: data.height + 'px',
+            }"
+          />
+
           <h4>Text to Image</h4>
           <input
             class="form-control rounded-1"
@@ -110,7 +120,9 @@
   
 <script setup lang="ts">
 import VueDrawingCanvas from "vue-drawing-canvas";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
+import Dragger from "@/components/Dragger.vue";
+
 
 const data = reactive({
   image: "",
@@ -118,7 +130,7 @@ const data = reactive({
   disabled: false,
   fillShape: false,
   line: 20,
-  color: "black",
+  color: "#000000",
   strokeType: "dash",
   lineCap: "round",
   lineJoin: "round",
@@ -129,6 +141,21 @@ const data = reactive({
   height: 400,
   width: 800,
 });
+const VueCanvasDrawing = ref<any>(null)
+let startX = 0
+let startY = 0
+
+function onDragStart() {
+  startX = data.width
+  startY = data.height
+}
+
+function onDrag($event) {
+  console.log("onDrag",$event)
+  data.width = startX + $event.x
+  data.height = startY + $event.y
+  window.setTimeout(() => VueCanvasDrawing.value.redraw())
+}
 </script>
   
 <style lang="scss">
