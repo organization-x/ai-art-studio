@@ -1,3 +1,4 @@
+<!---
 <template>
   <div class="container-fluid mt-4">
     <div v-if="data.status === 'drawing'">
@@ -231,4 +232,4 @@ async function send() {
   margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
 }
 </style>
-    
+-->
