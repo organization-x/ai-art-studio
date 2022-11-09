@@ -104,6 +104,7 @@
 
             <h4>Text to Image</h4>
             <input
+              v-model="data.input"
               class="form-control rounded-1"
               type="text"
               placeholder="Cartoon, Realistic, etc . . ."
@@ -157,6 +158,7 @@ const data = reactive({
   backgroundImage: null,
   watermark: null,
   additionalImages: [],
+  input: "",
   height: 400,
   width: 800,
 });
@@ -178,7 +180,20 @@ function onDrag($event: { x: number; y: number }) {
 
 async function send() {
   data.status = "sending";
-  data.imageResponse = await data.image;
+
+  const result = await fetch(
+    "https://web-production-e1af.up.railway.app/generate",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        input: data.input,
+        start_img: data.image,
+      }),
+    }
+  );
+
+  const img = (await result.json())["img"];
+  data.imageResponse = img.slice(2, img.length - 2);
 
   data.status = "success";
 }
