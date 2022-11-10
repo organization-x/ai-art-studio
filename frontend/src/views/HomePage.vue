@@ -105,8 +105,9 @@
             <h4>Text to Image</h4>
             <input
               class="form-control rounded-1 font-monospace"
+              v-model="data.input"
               type="text"
-              placeholder="Cartoon, Relistic, etc . . ."
+              placeholder="Cartoon, Realistic, etc . . ."
               aria-label="default input example"
             />
           </div>
@@ -118,9 +119,9 @@
       <div class="row">
         <div class="col-12" role="status"></div>
         <div class="d-flex align-items-center">
-          <p class="display-5 font-monospace"> -_- Keyo is Thinking . . . </p>
+          <p class="display-5 font-monospace">-_- Keyo is Thinking . . .</p>
           <div
-            style="width: 3rem; height: 3rem;"
+            style="width: 3rem; height: 3rem"
             class="spinner-border ms-auto"
             role="status"
             aria-hidden="true"
@@ -138,13 +139,27 @@
               DRAW AGAIN
             </button>
           </h3>
-          <img :src="data.imageResponse" class="rounded-1" />
+          <img
+            v-bind:src="'data:image/jpeg;base64,' + data.imageResponse"
+            height="512"
+            width="758"
+            class="rounded-1"
+          />
+          <br />
+          <br />
+          <h3>Original Image:</h3>
+          <img
+            v-bind:src="data.image"
+            height="512"
+            width="758"
+            class="rounded-1"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
-  
+
 <script setup lang="ts">
 import VueDrawingCanvas from "vue-drawing-canvas";
 import { reactive, ref } from "vue";
@@ -166,6 +181,7 @@ const data = reactive({
   backgroundImage: null,
   watermark: null,
   additionalImages: [],
+  input: "",
   height: 400,
   width: 800,
 });
@@ -178,7 +194,7 @@ function onDragStart() {
   startY = data.height;
 }
 
-function onDrag($event) {
+function onDrag($event: { x: number; y: number }) {
   // console.log("onDrag",$event)
   data.width = startX + $event.x;
   data.height = startY + $event.y;
@@ -187,12 +203,25 @@ function onDrag($event) {
 
 async function send() {
   data.status = "sending";
-  data.imageResponse = await data.image;
+
+  const result = await fetch(
+    "https://web-production-e1af.up.railway.app/generate",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        input: data.input,
+        start_img: data.image,
+      }),
+    }
+  );
+
+  const img = (await result.json())["img"];
+  data.imageResponse = img;
 
   data.status = "success";
 }
 </script>
-  
+
 <style lang="scss">
 .btn-tool {
   width: 50px;
@@ -237,4 +266,4 @@ async function send() {
   margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
 }
 </style>
-    
+-->
