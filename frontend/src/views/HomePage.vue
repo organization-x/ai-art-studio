@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-4">
     <div v-if="data.status === 'drawing'">
-      <h2>Canvas</h2>
+      <h2 class="fw-bold">Canvas</h2>
       <div class="row">
         <div class="col d-flex">
           <div class="d-flex flex-column pe-2">
@@ -70,16 +70,12 @@
             >
               <i class="fa-solid fa-trash"></i>
             </button>
-            <button
-              type="button"
-              @click.prevent="send()"
-              class="btn-tool"
-            >
+            <button type="button" @click.prevent="send()" class="btn-tool">
               <i class="fa-solid fa-paper-plane"></i>
               <!-- fill background -->
             </button>
           </div>
-          <div class="flex-grow-1 position-relative">
+          <div class="position-relative">
             <VueDrawingCanvas
               ref="VueCanvasDrawing"
               v-model:image="data.image"
@@ -108,7 +104,7 @@
 
             <h4>Text to Image</h4>
             <input
-              class="form-control rounded-1"
+              class="form-control rounded-1 font-monospace"
               type="text"
               placeholder="Cartoon, Relistic, etc . . ."
               aria-label="default input example"
@@ -120,17 +116,27 @@
 
     <div v-if="data.status === 'sending'">
       <div class="row">
-        <div class="col-12">Keyo is Thinking -_-</div>
+        <div class="col-12" role="status"></div>
+        <div class="d-flex align-items-center">
+          <p class="display-5 font-monospace"> -_- Keyo is Thinking . . . </p>
+          <div
+            style="width: 3rem; height: 3rem;"
+            class="spinner-border ms-auto"
+            role="status"
+            aria-hidden="true"
+          ></div>
+        </div>
       </div>
     </div>
 
     <div v-if="data.status === 'success'">
       <div class="row">
         <div class="col-12">
-          <h3>AI Generated Result:
-            <button @click="data.status ='drawing'" class = "btn btn-secondary">
-            DRAW AGAIN
-          </button>
+          <h3 class="fw-bold">
+            AI Generated Result:
+            <button @click="data.status = 'drawing'" class="btn btn-secondary">
+              DRAW AGAIN
+            </button>
           </h3>
           <img :src="data.imageResponse" class="rounded-1" />
         </div>
@@ -180,10 +186,10 @@ function onDrag($event) {
 }
 
 async function send() {
-  data.status = "sending"
-  data.imageResponse = await data.image 
+  data.status = "sending";
+  data.imageResponse = await data.image;
 
-  data.status = "success"
+  data.status = "success";
 }
 </script>
   
