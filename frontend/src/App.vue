@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 </script>
@@ -8,13 +7,7 @@ import { RouterLink, RouterView } from "vue-router";
     <header class="d-flex flex-wrap justify-content-center py-3">
       <a
         href="/"
-        class="
-          d-flex
-          align-items-center
-          mb-3 ms-3 mb-md-0
-          me-md-auto
-          text-light text-decoration-none
-        "
+        class="d-flex align-items-center mb-3 ms-3 mb-md-0 me-md-auto text-light text-decoration-none"
       >
         <span class="fs-4">Keyo Art</span>
       </a>
@@ -24,7 +17,8 @@ import { RouterLink, RouterView } from "vue-router";
           <RouterLink
             to="/home"
             class="nav-link px-2 text-light bold hover-underline-animation"
-            >Canvas</RouterLink>
+            >Canvas</RouterLink
+          >
         </li>
         <li class="me-2">
           <RouterLink
@@ -37,7 +31,7 @@ import { RouterLink, RouterView } from "vue-router";
           <RouterLink
             to="/questions"
             class="nav-link px-2 text-light hover-underline-animation"
-            >Questions</RouterLink
+            >FAQ</RouterLink
           >
         </li>
         <!-- <li>
@@ -82,7 +76,8 @@ header {
   transition: transform 0.25s ease-out;
 }
 
-.hover-underline-animation:hover::after, .router-link-active::after {
+.hover-underline-animation:hover::after,
+.router-link-active::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
