@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-4">
     <div v-if="data.status === 'drawing'">
-      <h2>Canvas</h2>
+      <h2 class="fw-bold">Canvas</h2>
       <div class="row">
         <div class="col d-flex">
           <div class="d-flex flex-column pe-2">
@@ -75,7 +75,7 @@
               <!-- fill background -->
             </button>
           </div>
-          <div class="flex-grow-1 position-relative">
+          <div class="position-relative">
             <VueDrawingCanvas
               ref="VueCanvasDrawing"
               v-model:image="data.image"
@@ -104,8 +104,8 @@
 
             <h4>Text to Image</h4>
             <input
+              class="form-control rounded-1 font-monospace"
               v-model="data.input"
-              class="form-control rounded-1"
               type="text"
               placeholder="Cartoon, Realistic, etc . . ."
               aria-label="default input example"
@@ -117,20 +117,43 @@
 
     <div v-if="data.status === 'sending'">
       <div class="row">
-        <div class="col-12">Keyo is Thinking -_-</div>
+        <div class="col-12" role="status"></div>
+        <div class="d-flex align-items-center">
+          <p class="display-5 font-monospace">-_- Keyo is Thinking . . .</p>
+          <div
+            style="width: 3rem; height: 3rem"
+            class="spinner-border ms-auto"
+            role="status"
+            aria-hidden="true"
+          ></div>
+        </div>
       </div>
     </div>
 
     <div v-if="data.status === 'success'">
       <div class="row">
         <div class="col-12">
-          <h3>
+          <h3 class="fw-bold">
             AI Generated Result:
             <button @click="data.status = 'drawing'" class="btn btn-secondary">
               DRAW AGAIN
             </button>
           </h3>
-          <img :src="data.imageResponse" class="rounded-1" />
+          <img
+            v-bind:src="'data:image/jpeg;base64,' + data.imageResponse"
+            height="512"
+            width="758"
+            class="rounded-1"
+          />
+          <br />
+          <br />
+          <h3>Original Image:</h3>
+          <img
+            v-bind:src="data.image"
+            height="512"
+            width="758"
+            class="rounded-1"
+          />
         </div>
       </div>
     </div>
@@ -193,7 +216,7 @@ async function send() {
   );
 
   const img = (await result.json())["img"];
-  data.imageResponse = img.slice(2, img.length - 2);
+  data.imageResponse = img;
 
   data.status = "success";
 }
